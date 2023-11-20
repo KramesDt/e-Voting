@@ -4,6 +4,7 @@ pragma solidity ^0.8.0;
 contract Voting {
     struct Candidate {
         string name;
+        string party;
         uint256 voteCount;
     }
 
@@ -14,10 +15,11 @@ contract Voting {
     uint256 public votingStart;
     uint256 public votingEnd;
 
-constructor(string[] memory _candidateNames, uint256 _durationInMinutes) {
+constructor(string[] memory _candidateNames, string[] memory _candidateParty, uint256 _durationInMinutes) {
     for (uint256 i = 0; i < _candidateNames.length; i++) {
         candidates.push(Candidate({
             name: _candidateNames[i],
+            party: _candidateParty[i],
             voteCount: 0
         }));
     }
@@ -31,9 +33,10 @@ constructor(string[] memory _candidateNames, uint256 _durationInMinutes) {
         _;
     }
 
-    function addCandidate(string memory _name) public onlyOwner {
+    function addCandidate(string memory _name, string memory _party) public onlyOwner {
         candidates.push(Candidate({
                 name: _name,
+                party: _party,
                 voteCount: 0
         }));
     }
