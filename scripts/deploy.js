@@ -1,10 +1,20 @@
-async function main() {
-  const Voting = await ethers.getContractFactory("Voting");
+const { ethers } = require("hardhat");
 
-  // Start deployment, returning a promise that resolves to a contract object
-  const Voting_ = await Voting.deploy(["Mark", "Mike", "Henry", "Rock"], ["PDP", "SDP", "APC", "LP"], 90);
-  // console.log("Contract address:", Voting_.address);
-  console.log("Successsfully deployed at: ", Voting_.address)
+async function main() {
+  const deployer = await ethers.provider.getSigner();
+  console.log("Deploying contracts with the account:", deployer.address);
+  const accountBalance = await deployer.provider.getBalance(deployer.address);
+  console.log("Account balance: ", accountBalance.toString());
+
+  const Voting = await ethers.getContractFactory("Voting");
+  const Voting_ = await Voting.deploy(
+    ["Mark", "Mike", "Henry", "Rock"],
+    ["PDP", "SDP", "APC", "LP"],
+    90
+  );
+
+  await Voting_.waitForDeployment();
+  console.log("Successsfully deployed at: ", Voting_.address);
 }
 
 main()
