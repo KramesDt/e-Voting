@@ -8,7 +8,7 @@ async function main() {
 
   const candidates = ["Bola Tinunbu", "Adeyeye Omokorede", "Dare Samuel", "Osuolale Festus", "Prof Obe"];
   const party = ["PDP", "SDP", "APC", "LP", "FUTA"];
-  const votingDurationInMinutes = 90;
+  const votingDurationInMinutes = 9000;
 
   const Voting = await ethers.getContractFactory("Voting");
   const Voting_ = await Voting.deploy(
