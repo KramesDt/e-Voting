@@ -31,14 +31,15 @@ const getRemainingTime = async (req, res, next) =>{
 
 const voting = async (req, res, next) =>{
     const { candidateIndex } = req.body
-    if(!candidateIndex){
-        return res.status(404).json({message: "Please input the candidate index"})
-    }
+    console.log(candidateIndex)
+    // if(!candidateIndex){
+    //     return res.status(404).json({message: "Please input the candidate index"})
+    // }
     try {
         await vote(candidateIndex);
         return res.status(200).json({message: "Voting Successful"})
     } catch (error) {
-        return res.status(400).json({ message: error.message });
+        return res.status(400).json({ message: error});
     }
 }
 
