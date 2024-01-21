@@ -14,7 +14,7 @@ async function fetchAllCandidates() {
   try {
     const allCandidates = await contract.getAllVotesOfCandiates();
     // console.log("All Candidates:", allCandidates);
-    return {allCandidates}
+    return allCandidates.toString()
   } catch (error) {
     throw error
   }
@@ -33,8 +33,9 @@ async function checkVotingStatus() {
 async function checkRemainingTime() {
   try {
     const remainingTime = await contract.getRemainingTime();
-    console.log("Remaining Time:", remainingTime, "seconds");
-    return remainingTime
+    // console.log("Remaining Time:", remainingTime, "seconds");
+    // return JSON.stringify(remainingTime);
+    return remainingTime.toString();
   } catch (error) {
     throw error
   }
