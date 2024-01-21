@@ -13,8 +13,8 @@ const contract = new ethers.Contract(CONTRACT_ADDRESS, contractAbi.abi, signer);
 async function fetchAllCandidates() {
   try {
     const allCandidates = await contract.getAllVotesOfCandiates();
-    console.log("All Candidates:", allCandidates);
-    return allCandidates
+    // console.log("All Candidates:", allCandidates);
+    return {allCandidates}
   } catch (error) {
     throw error
   }
@@ -22,8 +22,8 @@ async function fetchAllCandidates() {
 
 async function checkVotingStatus() {
   try {
-    const votingStatus = await contract.getVotingStatus();
-    console.log("Is Voting Active?", votingStatus);
+    let votingStatus = await contract.getVotingStatus();
+    // console.log("Is Voting Active?", votingStatus);
     return votingStatus
   } catch (error) {
     throw error
@@ -55,11 +55,12 @@ module.exports = {
   checkVotingStatus,
   fetchAllCandidates,
   vote,
+  contract
 }; 
 
 
 // fetchAllCandidates();
 // vote(1)
 // fetchAllCandidates();
-// checkVotingStatus();
+checkVotingStatus();
 // checkRemainingTime();
