@@ -3,7 +3,6 @@ const { ethers } = require("hardhat");
 const API_KEY = process.env.API_KEY;
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS;
-const SEPOLIA_URL = process.env.SEPOLIA_URL;
 
 const contractAbi = require("../artifacts/contracts/Voting.sol/Voting.json");
 const provider = new ethers.AlchemyProvider((network = "sepolia"), API_KEY);
@@ -15,8 +14,9 @@ async function fetchAllCandidates() {
   try {
     const allCandidates = await contract.getAllVotesOfCandiates();
     console.log("All Candidates:", allCandidates);
+    return allCandidates
   } catch (error) {
-    console.error("Error:", error.message);
+    throw error
   }
 }
 
@@ -24,8 +24,9 @@ async function checkVotingStatus() {
   try {
     const votingStatus = await contract.getVotingStatus();
     console.log("Is Voting Active?", votingStatus);
+    return votingStatus
   } catch (error) {
-    console.error("Error:", error.message);
+    throw error
   }
 }
 
@@ -33,8 +34,9 @@ async function checkRemainingTime() {
   try {
     const remainingTime = await contract.getRemainingTime();
     console.log("Remaining Time:", remainingTime, "seconds");
+    return remainingTime
   } catch (error) {
-    console.error("Error:", error.message);
+    throw error
   }
 }
 
@@ -44,13 +46,20 @@ async function vote(candidateIndex) {
     await contract.vote(candidateIndex);
     console.log("Vote Successful!");
   } catch (error) {
-    console.error("Error:", error.message);
+    throw error
   }
 }
+
+module.exports = {
+  checkRemainingTime,
+  checkVotingStatus,
+  fetchAllCandidates,
+  vote,
+}; 
 
 
 // fetchAllCandidates();
 // vote(1)
 // fetchAllCandidates();
-checkVotingStatus();
-checkRemainingTime();
+// checkVotingStatus();
+// checkRemainingTime();

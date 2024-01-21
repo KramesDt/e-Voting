@@ -6,11 +6,15 @@ async function main() {
   const accountBalance = await deployer.provider.getBalance(deployer.address);
   console.log("Account balance: ", accountBalance.toString());
 
+  const candidates = ["Bola Tinunbu", "Adeyeye Omokorede", "Dare Samuel", "Osuolale Festus", "Prof Obe"];
+  const party = ["PDP", "SDP", "APC", "LP", "FUTA"];
+  const votingDurationInMinutes = 90;
+
   const Voting = await ethers.getContractFactory("Voting");
   const Voting_ = await Voting.deploy(
-    ["Mark", "Mike", "Henry", "Rock"],
-    ["PDP", "SDP", "APC", "LP"],
-    90
+    candidates,
+    party,
+    votingDurationInMinutes
   );
 
   await Voting_.waitForDeployment();

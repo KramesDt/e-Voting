@@ -4,6 +4,7 @@
   "description": "E-Voting with BlockChain",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon --experimental-modules --es-module-specifier-resolution=node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Adeyeye Omokorede, Samuel Owonibi",
@@ -13,6 +14,8 @@
     "hardhat": "^2.19.0"
   },
   "dependencies": {
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "nodemon": "^3.0.3"
   }
 }
