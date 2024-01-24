@@ -12,11 +12,22 @@ const contract = new ethers.Contract(CONTRACT_ADDRESS, contractAbi.abi, signer);
 
 async function fetchAllCandidates() {
   try {
-    const allCandidates = await contract.getAllVotesOfCandiates();
+    let allCandidates = await contract.getAllVotesOfCandiates();
+
+    const customJson = JSON.stringify(allCandidates, (key, value) => {
+      return typeof value === "bigint" ? value.toString() : value;
+    });
+
+    const outputObject = JSON.parse(customJson);
+
+    // console.log("All Candidates:", customJson);
+    console.log("All Candidates:", outputObject);
     // console.log("All Candidates:", allCandidates);
-    return allCandidates.toString()
+
+
+    return outputObject;
   } catch (error) {
-    throw error
+    throw error;
   }
 }
 
@@ -24,9 +35,9 @@ async function checkVotingStatus() {
   try {
     let votingStatus = await contract.getVotingStatus();
     // console.log("Is Voting Active?", votingStatus);
-    return votingStatus
+    return votingStatus;
   } catch (error) {
-    throw error
+    throw error;
   }
 }
 
@@ -34,10 +45,9 @@ async function checkRemainingTime() {
   try {
     const remainingTime = await contract.getRemainingTime();
     // console.log("Remaining Time:", remainingTime, "seconds");
-    // return JSON.stringify(remainingTime);
     return remainingTime.toString();
   } catch (error) {
-    throw error
+    throw error;
   }
 }
 
@@ -47,7 +57,7 @@ async function vote(candidateIndex) {
     await contract.vote(candidateIndex);
     console.log("Vote Successful!");
   } catch (error) {
-    throw error
+    throw error;
   }
 }
 
@@ -56,12 +66,11 @@ module.exports = {
   checkVotingStatus,
   fetchAllCandidates,
   vote,
-  contract
-}; 
+  contract,
+};
 
-
-// fetchAllCandidates();
+fetchAllCandidates();
 // vote(1)
 // fetchAllCandidates();
-checkVotingStatus();
+// checkVotingStatus();
 // checkRemainingTime();
