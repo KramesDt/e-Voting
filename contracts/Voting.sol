@@ -42,7 +42,7 @@ constructor(string[] memory _candidateNames, string[] memory _candidateParty, ui
     }
 
     function vote(uint256 _candidateIndex) public {
-        require(!voters[msg.sender], "You have already voted.");
+        // require(!voters[msg.sender], "You have already voted.");
         require(_candidateIndex < candidates.length, "Invalid candidate index.");
 
         candidates[_candidateIndex].voteCount++;
