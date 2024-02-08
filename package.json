@@ -2,7 +2,7 @@
   "name": "election",
   "version": "1.0.0",
   "description": "E-Voting with BlockChain",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "nodemon --experimental-modules --es-module-specifier-resolution=node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
