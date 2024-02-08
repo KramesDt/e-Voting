@@ -69,7 +69,7 @@ module.exports = {
   contract,
 };
 
-fetchAllCandidates();
+// fetchAllCandidates();
 // vote(1)
 // fetchAllCandidates();
 // checkVotingStatus();
